@@ -36,4 +36,4 @@ One group member should submit search.py and the other should submit only a text
 
 ## Team Members
 - [@Osida](https://github.com/Osida)
-- [@Everett](#)
+- [@Everett](https://github.com/Osida/cosc461_project1_search)
