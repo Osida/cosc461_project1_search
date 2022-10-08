@@ -6,6 +6,9 @@
   Project 1: Search
 </h1>
 
+## Tech
+- **Language**: [Python 2.7.18](https://www.python.org/downloads/release/python-2718/)
+- **IDE**: [PyCharm](https://www.jetbrains.com/pycharm/)
 
 ## Instructions
 [Project 1: Search](http://ai.berkeley.edu/search.html)
