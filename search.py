@@ -116,10 +116,9 @@ def depthFirstSearch(problem):
         # If the node hasn't been visited add to visited list & get the unvisted nodes sucessor nodes to be explored
         if state not in visited_list:
             visited_list.append(state)
-            successor_nodes = problem.getSuccessors(state)
 
             # For each sucessor node check if it has been visited if not add to solution plan & add unvisited node to stack
-            for successor_state, successor_action, successor_cost in successor_nodes:
+            for successor_state, successor_action, successor_cost in problem.getSuccessors(state):
                 if successor_state not in visited_list:
                     successor_action = solution_plan + [successor_action]
                     unvisited_node = tuple((successor_state, successor_action, 1))
@@ -142,9 +141,8 @@ def breadthFirstSearch(problem):
 
         if state not in visited_list:
             visited_list.append(state)
-            successor_nodes = problem.getSuccessors(state)
 
-            for successor_state, successor_action, successor_cost in successor_nodes:
+            for successor_state, successor_action, successor_cost in problem.getSuccessors(state):
                 if successor_state not in visited_list:
                     successor_action = solution_plan + [successor_action]
                     unvisited_node = tuple((successor_state, successor_action, 1))
@@ -154,7 +152,34 @@ def breadthFirstSearch(problem):
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    print "problem:", problem
+    print "Start:", problem.getStartState()
+    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    print "Start's successors:", problem.getSuccessors(problem.getStartState())
+
+    fringe = util.PriorityQueue()
+    visited_list = list()
+    initial_path_cost = 0
+    initial_node = tuple((problem.getStartState(), list(), 0))
+    fringe.push(initial_node, initial_path_cost)
+
+    while not fringe.isEmpty():
+        state, solution_plan, path_cost = fringe.pop()
+
+        if problem.isGoalState(state):
+            return solution_plan
+
+        if state not in visited_list:
+            visited_list.append(state)
+
+        for successor_state, successor_action, successor_cost in problem.getSuccessors(state):
+            # print 'child_state: {}, child_action: {}, child_cost: {}'.format(successor_state, successor_action,
+            #                                                                  successor_cost)
+            if successor_state not in visited_list:
+                successor_action = solution_plan + [successor_action]
+                unvisited_node = tuple((successor_state, successor_action, path_cost + successor_cost))
+                fringe.push(unvisited_node, successor_cost + path_cost)
+                fringe.update(unvisited_node, successor_cost + path_cost)
 
 
 def nullHeuristic(state, problem=None):
