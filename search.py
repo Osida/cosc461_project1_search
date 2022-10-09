@@ -19,6 +19,7 @@ Pacman agents (in searchAgents.py).
 
 import util
 
+
 class SearchProblem:
     """
     This class outlines the structure of a search problem, but doesn't implement
@@ -70,7 +71,8 @@ def tinyMazeSearch(problem):
     from game import Directions
     s = Directions.SOUTH
     w = Directions.WEST
-    return  [s, s, w, s, w, w, s, w]
+    return [s, s, w, s, w, w, s, w]
+
 
 def depthFirstSearch(problem):
     """
@@ -82,22 +84,59 @@ def depthFirstSearch(problem):
     To get started, you might want to try some of these simple commands to
     understand the search problem that is being passed in:
 
+    print "problem:", problem
     print "Start:", problem.getStartState()
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # print "problem:", problem
+    # print "Start:", problem.getStartState()
+    # print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    # print "Start's successors:", problem.getSuccessors(problem.getStartState())
+
+    fringe_data_structure = util.Stack()
+    """ A fringe, is a data structure used to store all the possible states (nodes) that you can go from the current state """
+
+    visited_list = list()
+    """ Keeps track of the states already visited """
+
+    initial_node = tuple((problem.getStartState(), list(), 1))
+    """ The initial: starting state, visited list, step cost """
+
+    fringe_data_structure.push(initial_node)
+
+    while not fringe_data_structure.isEmpty():
+        state, solution_plan, step_cost = fringe_data_structure.pop()
+
+        # If goal states return solution plan (the sequence of nodes from start node to goal node)
+        if problem.isGoalState(state):
+            return solution_plan
+
+        # If the node hasn't been visited add to visited list & get the unvisted nodes sucessor nodes to be explored
+        if state not in visited_list:
+            visited_list.append(state)
+            successor_nodes = problem.getSuccessors(state)
+
+            # For each sucessor node check if it has been visited if not add to solution plan & add unvisited node to stack
+            for successor_state, successor_action, successor_cost in successor_nodes:
+                if successor_state not in visited_list:
+                    successor_action = solution_plan + [successor_action]
+                    unvisited_node = tuple((successor_state, successor_action, 1))
+                    fringe_data_structure.push(unvisited_node)
+
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
 
+
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+
 
 def nullHeuristic(state, problem=None):
     """
@@ -105,6 +144,7 @@ def nullHeuristic(state, problem=None):
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
     return 0
+
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
