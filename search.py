@@ -95,7 +95,7 @@ def depthFirstSearch(problem):
     # print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     # print "Start's successors:", problem.getSuccessors(problem.getStartState())
 
-    fringe_data_structure = util.Stack()
+    fringe = util.Stack()
     """ A fringe, is a data structure used to store all the possible states (nodes) that you can go from the current state """
 
     visited_list = list()
@@ -104,10 +104,10 @@ def depthFirstSearch(problem):
     initial_node = tuple((problem.getStartState(), list(), 1))
     """ The initial: starting state, visited list, step cost """
 
-    fringe_data_structure.push(initial_node)
+    fringe.push(initial_node)
 
-    while not fringe_data_structure.isEmpty():
-        state, solution_plan, step_cost = fringe_data_structure.pop()
+    while not fringe.isEmpty():
+        state, solution_plan, step_cost = fringe.pop()
 
         # If goal states return solution plan (the sequence of nodes from start node to goal node)
         if problem.isGoalState(state):
@@ -123,13 +123,32 @@ def depthFirstSearch(problem):
                 if successor_state not in visited_list:
                     successor_action = solution_plan + [successor_action]
                     unvisited_node = tuple((successor_state, successor_action, 1))
-                    fringe_data_structure.push(unvisited_node)
+                    fringe.push(unvisited_node)
 
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    fringe = util.Queue()
+    visited_list = list()
+    initial_node = tuple((problem.getStartState(), list(), 1))
+    fringe.push(initial_node)
+
+    while not fringe.isEmpty():
+        state, solution_plan, step_cost = fringe.pop()
+
+        if problem.isGoalState(state):
+            return solution_plan
+
+        if state not in visited_list:
+            visited_list.append(state)
+            successor_nodes = problem.getSuccessors(state)
+
+            for successor_state, successor_action, successor_cost in successor_nodes:
+                if successor_state not in visited_list:
+                    successor_action = solution_plan + [successor_action]
+                    unvisited_node = tuple((successor_state, successor_action, 1))
+                    fringe.push(unvisited_node)
 
 
 def uniformCostSearch(problem):
