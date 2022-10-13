@@ -152,11 +152,6 @@ def breadthFirstSearch(problem):
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    print "problem:", problem
-    print "Start:", problem.getStartState()
-    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    print "Start's successors:", problem.getSuccessors(problem.getStartState())
-
     fringe = util.PriorityQueue()
     visited_list = list()
     initial_path_cost = 0
@@ -173,8 +168,6 @@ def uniformCostSearch(problem):
             visited_list.append(state)
 
         for successor_state, successor_action, successor_cost in problem.getSuccessors(state):
-            # print 'child_state: {}, child_action: {}, child_cost: {}'.format(successor_state, successor_action,
-            #                                                                  successor_cost)
             if successor_state not in visited_list:
                 successor_action = solution_plan + [successor_action]
                 unvisited_node = tuple((successor_state, successor_action, path_cost + successor_cost))
@@ -193,7 +186,29 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    fringe = util.PriorityQueue()
+    visited_list = list()
+    estimated_cost_from_node_to_goal = heuristic(problem.getStartState(), problem)
+    initial_node = tuple((problem.getStartState(), list(), 0))
+    fringe.push(initial_node, estimated_cost_from_node_to_goal)
+
+    while not fringe.isEmpty():
+        state, solution_plan, path_cost = fringe.pop()
+
+        if problem.isGoalState(state):
+            return solution_plan
+
+        if state not in visited_list:
+            visited_list.append(state)
+
+            for successor_state, successor_action, successor_cost in problem.getSuccessors(state):
+                if successor_state not in visited_list:
+                    successor_action = solution_plan + [successor_action]
+                    cost_from_start_to_node = problem.getCostOfActions(successor_action)
+                    estimated_cost_from_node_to_goal = heuristic(successor_state, problem)
+                    unvisited_node = tuple((successor_state, successor_action, 0))
+                    fringe.push(unvisited_node, cost_from_start_to_node + estimated_cost_from_node_to_goal)
 
 
 # Abbreviations
