@@ -1,3 +1,6 @@
+# COSC 461.001: Osida Richards, Everett CLay
+# 10/14/2022
+
 # search.py
 # ---------
 # Licensing Information:  You are free to use or extend these projects for
@@ -90,10 +93,8 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
-    # print "problem:", problem
-    # print "Start:", problem.getStartState()
-    # print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    # print "Start's successors:", problem.getSuccessors(problem.getStartState())
+    print "problem:", problem
+    print "Start:", problem.getStartState()
 
     fringe = util.Stack()
     """ A fringe, is a data structure used to store all the possible states (nodes) that you can go from the current state """
@@ -107,20 +108,19 @@ def depthFirstSearch(problem):
     fringe.push(initial_node)
 
     while not fringe.isEmpty():
-        state, solution_plan, step_cost = fringe.pop()
+        state, action, path_cost = fringe.pop()
 
         # If goal states return solution plan (the sequence of nodes from start node to goal node)
         if problem.isGoalState(state):
-            return solution_plan
+            return action
 
         # If the node hasn't been visited add to visited list & get the unvisted nodes sucessor nodes to be explored
         if state not in visited_list:
             visited_list.append(state)
-
             # For each sucessor node check if it has been visited if not add to solution plan & add unvisited node to stack
             for successor_state, successor_action, successor_cost in problem.getSuccessors(state):
                 if successor_state not in visited_list:
-                    successor_action = solution_plan + [successor_action]
+                    successor_action = action + [successor_action]
                     unvisited_node = tuple((successor_state, successor_action, 1))
                     fringe.push(unvisited_node)
 
@@ -171,7 +171,7 @@ def uniformCostSearch(problem):
             if successor_state not in visited_list:
                 successor_action = solution_plan + [successor_action]
                 unvisited_node = tuple((successor_state, successor_action, path_cost + successor_cost))
-                fringe.push(unvisited_node, successor_cost + path_cost)
+                # fringe.push(unvisited_node, successor_cost + path_cost)
                 fringe.update(unvisited_node, successor_cost + path_cost)
 
 
@@ -205,10 +205,14 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             for successor_state, successor_action, successor_cost in problem.getSuccessors(state):
                 if successor_state not in visited_list:
                     successor_action = solution_plan + [successor_action]
-                    cost_from_start_to_node = problem.getCostOfActions(successor_action)
-                    estimated_cost_from_node_to_goal = heuristic(successor_state, problem)
-                    unvisited_node = tuple((successor_state, successor_action, 0))
-                    fringe.push(unvisited_node, cost_from_start_to_node + estimated_cost_from_node_to_goal)
+
+                    cost_from_start_to_node = problem.getCostOfActions(successor_action)  # gn
+                    estimated_cost_from_node_to_goal = heuristic(successor_state, problem)  # hn
+                    fn = cost_from_start_to_node + estimated_cost_from_node_to_goal
+
+                    unvisited_node = tuple((successor_state, successor_action, 1))
+
+                    fringe.push(unvisited_node, fn)
 
 
 # Abbreviations
