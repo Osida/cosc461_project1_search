@@ -6,6 +6,16 @@
   Project 1: Search
 </h1>
 
+- [Tech](#tech)
+- [Instructions](#instructions)
+- [Questions](#questions)
+    + [Autograder](#autograder)
+    + [Question 1](#question-1)
+    + [Question 2](#question-2)
+    + [Question 3](#question-3)
+    + [Question 4](#question-4)
+- [Team Members](#team-members)
+
 ## Tech
 - **Language**: [Python 2.7.18](https://www.python.org/downloads/release/python-2718/)
 - **IDE**: [PyCharm](https://www.jetbrains.com/pycharm/)
@@ -23,15 +33,15 @@ One group member should submit search.py and the other should submit only a text
 
 
 ## Questions
-#### Autograder
 
+### Autograder
 ```
 python autograder.py
 ```
 <img width="501" alt="image" src="https://user-images.githubusercontent.com/51928654/199377466-cb347ca8-f7b3-4f0d-84b6-f3eac3d9fc39.png">
 
 
-#### Question 1
+### Question 1
 <img width="500" alt="Q1" src="https://user-images.githubusercontent.com/51928654/194623423-b17ef90e-043a-44f9-acd1-fa1f912b3836.png"/>
 
 ```
@@ -50,7 +60,7 @@ python pacman.py -l bigMaze -z .5 -p SearchAgent
 <img width="522" alt="image" src="https://user-images.githubusercontent.com/51928654/199374202-d143c722-e5a5-407c-a5e9-83c090f3a68d.png">
 
 
-#### Question 2
+### Question 2
 <img width="500" alt="Q2" src="https://user-images.githubusercontent.com/51928654/194623674-a7c643f4-d1be-4d02-9086-ff8b00ad7516.png">
 
 ```
@@ -69,7 +79,7 @@ python eightpuzzle.py
 <img width="767" alt="image" src="https://user-images.githubusercontent.com/51928654/199375829-3a754735-4e50-479e-904a-bf0bb5178ea6.png">
 
 
-#### Question 3
+### Question 3
 <img width="500" alt="Q3" src="https://user-images.githubusercontent.com/51928654/194623761-45b9eb50-2676-4d9c-a4ce-84d38961353b.png">
 
 ```
@@ -88,7 +98,7 @@ python pacman.py -l mediumScaryMaze -p StayWestSearchAgent
 <img width="467" alt="image" src="https://user-images.githubusercontent.com/51928654/199376249-a6a26080-dde1-4aaa-bcbe-101023072600.png">
 
 
-#### Question 4
+### Question 4
 <img width="500" alt="Q4" src="https://user-images.githubusercontent.com/51928654/194623880-cd42562a-3110-4e7b-b3f4-1ebe58949c45.png">
 
 ```
