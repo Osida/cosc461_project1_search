@@ -9,11 +9,11 @@
 - [Tech](#tech)
 - [Instructions](#instructions)
 - [Questions](#questions)
-    + [Autograder](#autograder)
-    + [Question 1](#question-1)
-    + [Question 2](#question-2)
-    + [Question 3](#question-3)
-    + [Question 4](#question-4)
+  * [Autograder](#autograder)
+  * [Question 1](#question-1)
+  * [Question 2](#question-2)
+  * [Question 3](#question-3)
+  * [Question 4](#question-4)
 - [Team Members](#team-members)
 
 ## Tech
